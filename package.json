@@ -1,0 +1,41 @@
+{
+  "name": "todo-list-app",
+  "version": "1.0.0",
+  "description": "Todo List Application with NestJS and React",
+  "private": true,
+  "workspaces": [
+    "server",
+    "client"
+  ],
+  "scripts": {
+    "install:server": "cd server && npm install",
+    "install:client": "cd client && npm install",
+    "install:all": "npm run install:server && npm run install:client",
+    "dev:server": "cd server && npm run start:dev",
+    "dev:client": "cd client && npm run dev",
+    "dev": "concurrently \"npm run dev:server\" \"npm run dev:client\"",
+    "build:server": "cd server && npm run build",
+    "build:client": "cd client && npm run build",
+    "build": "npm run build:server && npm run build:client",
+    "start:server": "cd server && npm run start:prod",
+    "start:client": "cd client && npm run preview",
+    "test:server": "cd server && npm test",
+    "test:client": "cd client && npm test",
+    "db:init": "cd server && npm run db:init",
+    "db:seed": "cd server && npm run db:seed",
+    "migration:run": "cd server && npm run migration:run",
+    "migration:revert": "cd server && npm run migration:revert"
+  },
+  "keywords": [
+    "todo",
+    "task-management",
+    "nestjs",
+    "react",
+    "typescript"
+  ],
+  "author": "",
+  "license": "UNLICENSED",
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}

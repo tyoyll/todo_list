@@ -1,0 +1,19 @@
+.register-page {
+  .register-button {
+    height: 45px;
+    font-size: 16px;
+    font-weight: 500;
+    margin-top: $spacing-md;
+  }
+
+  .register-footer {
+    text-align: center;
+    color: $text-secondary;
+
+    a {
+      color: $primary-color;
+      font-weight: 500;
+    }
+  }
+}
+

@@ -1,0 +1,28 @@
+.login-page {
+  .login-options {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .login-form-forgot {
+    color: $primary-color;
+  }
+
+  .login-button {
+    height: 45px;
+    font-size: 16px;
+    font-weight: 500;
+  }
+
+  .login-footer {
+    text-align: center;
+    color: $text-secondary;
+
+    a {
+      color: $primary-color;
+      font-weight: 500;
+    }
+  }
+}
+
