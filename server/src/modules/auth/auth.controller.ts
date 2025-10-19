@@ -1,8 +1,10 @@
-import { Controller, Post, Body, Get, UseGuards } from '@nestjs/common';
+import { Controller, Post, Body, Get, UseGuards, Query } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { RegisterDto } from './dto/register.dto';
 import { LoginDto } from './dto/login.dto';
 import { RefreshTokenDto } from './dto/refresh-token.dto';
+import { ForgotPasswordDto } from './dto/forgot-password.dto';
+import { ResetPasswordDto } from './dto/reset-password.dto';
 import { Public } from '../../common/decorators/public.decorator';
 import { CurrentUser } from '../../common/decorators/current-user.decorator';
 import { JwtAuthGuard } from './guards/jwt-auth.guard';
@@ -59,6 +61,36 @@ export class AuthController {
     return {
       message: '登出成功',
     };
+  }
+
+  /**
+   * 请求密码重置
+   * 发送密码重置邮件
+   */
+  @Public()
+  @Post('forgot-password')
+  async forgotPassword(@Body() forgotPasswordDto: ForgotPasswordDto) {
+    return await this.authService.forgotPassword(forgotPasswordDto);
+  }
+
+  /**
+   * 重置密码
+   * 使用重置令牌更新密码
+   */
+  @Public()
+  @Post('reset-password')
+  async resetPassword(@Body() resetPasswordDto: ResetPasswordDto) {
+    return await this.authService.resetPassword(resetPasswordDto);
+  }
+
+  /**
+   * 验证重置令牌
+   * 检查令牌是否有效
+   */
+  @Public()
+  @Get('verify-reset-token')
+  async verifyResetToken(@Query('token') token: string) {
+    return await this.authService.verifyResetToken(token);
   }
 }
 

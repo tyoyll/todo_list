@@ -51,6 +51,12 @@ export class User {
   @Column({ default: true })
   notificationsEnabled: boolean;
 
+  @Column({ nullable: true })
+  resetPasswordToken?: string;
+
+  @Column({ nullable: true, type: 'timestamp' })
+  resetPasswordExpires?: Date;
+
   @CreateDateColumn()
   createdAt: Date;
 
