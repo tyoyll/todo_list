@@ -1,0 +1,26 @@
+.settings-page {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 24px;
+
+  .ant-card {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .ant-tabs {
+    .ant-tabs-tab {
+      font-size: 16px;
+    }
+  }
+
+  .ant-form {
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .ant-divider {
+    margin: 32px 0 16px;
+    font-weight: 500;
+  }
+}
+

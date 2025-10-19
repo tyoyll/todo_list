@@ -1,0 +1,21 @@
+.task-detail-page {
+  padding: 24px;
+
+  .ant-card {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .notes-section,
+  .attachments-section {
+    margin-top: 16px;
+  }
+
+  .ant-list-item {
+    transition: background-color 0.3s;
+
+    &:hover {
+      background-color: #f5f5f5;
+    }
+  }
+}
+

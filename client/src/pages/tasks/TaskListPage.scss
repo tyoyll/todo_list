@@ -1,0 +1,27 @@
+.task-list-page {
+  padding: 24px;
+
+  .stats-row {
+    margin-bottom: 24px;
+
+    .ant-card {
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+      transition: all 0.3s;
+
+      &:hover {
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+      }
+    }
+  }
+
+  .filter-row {
+    margin-bottom: 16px;
+  }
+
+  .ant-table {
+    .ant-tag {
+      margin: 0;
+    }
+  }
+}
+

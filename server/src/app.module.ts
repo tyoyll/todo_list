@@ -6,6 +6,11 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { databaseConfig } from './config/database.config';
 import { AuthModule } from './modules/auth/auth.module';
+import { UsersModule } from './modules/users/users.module';
+import { TasksModule } from './modules/tasks/tasks.module';
+import { TimeManagementModule } from './modules/time-management/time-management.module';
+import { StatisticsModule } from './modules/statistics/statistics.module';
+import { NotificationsModule } from './modules/notifications/notifications.module';
 import { JwtAuthGuard } from './modules/auth/guards/jwt-auth.guard';
 
 @Module({
@@ -19,6 +24,16 @@ import { JwtAuthGuard } from './modules/auth/guards/jwt-auth.guard';
     TypeOrmModule.forRoot(databaseConfig),
     // 认证模块
     AuthModule,
+    // 用户模块
+    UsersModule,
+    // 任务模块
+    TasksModule,
+    // 时间管理模块
+    TimeManagementModule,
+    // 统计模块
+    StatisticsModule,
+    // 通知模块
+    NotificationsModule,
   ],
   controllers: [AppController],
   providers: [

@@ -8,9 +8,11 @@ const AuthLayout = React.lazy(() => import('../components/layout/AuthLayout'));
 // 页面组件
 const LoginPage = React.lazy(() => import('../pages/auth/LoginPage'));
 const RegisterPage = React.lazy(() => import('../pages/auth/RegisterPage'));
+const ForgotPasswordPage = React.lazy(() => import('../pages/auth/ForgotPasswordPage'));
 const DashboardPage = React.lazy(() => import('../pages/dashboard/DashboardPage'));
 const TaskListPage = React.lazy(() => import('../pages/tasks/TaskListPage'));
 const TaskDetailPage = React.lazy(() => import('../pages/tasks/TaskDetailPage'));
+const TaskFormPage = React.lazy(() => import('../pages/tasks/TaskFormPage'));
 const SettingsPage = React.lazy(() => import('../pages/settings/SettingsPage'));
 const NotFoundPage = React.lazy(() => import('../pages/error/NotFoundPage'));
 
@@ -34,6 +36,10 @@ export const router = createBrowserRouter([
         path: 'register',
         element: <RegisterPage />,
       },
+      {
+        path: 'forgot-password',
+        element: <ForgotPasswordPage />,
+      },
     ],
   },
   {
@@ -49,8 +55,16 @@ export const router = createBrowserRouter([
         element: <TaskListPage />,
       },
       {
+        path: 'tasks/new',
+        element: <TaskFormPage />,
+      },
+      {
         path: 'tasks/:id',
         element: <TaskDetailPage />,
+      },
+      {
+        path: 'tasks/:id/edit',
+        element: <TaskFormPage />,
       },
       {
         path: 'settings',

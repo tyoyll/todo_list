@@ -1,0 +1,27 @@
+.app-sidebar {
+  box-shadow: 2px 0 8px rgba(0, 0, 0, 0.08);
+  background: #fff;
+
+  .ant-menu {
+    padding-top: 16px;
+  }
+
+  .ant-menu-item {
+    margin: 4px 8px;
+    border-radius: 4px;
+
+    &.ant-menu-item-selected {
+      background-color: #e6f7ff;
+      color: #1890ff;
+
+      &::after {
+        display: none;
+      }
+    }
+
+    &:hover {
+      color: #1890ff;
+    }
+  }
+}
+
