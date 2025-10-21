@@ -1,13 +1,23 @@
 import { IsString, IsNotEmpty, MinLength, Matches } from 'class-validator';
+import { ApiProperty } from '@nestjs/swagger';
 
 /**
  * 重置密码 DTO
  */
 export class ResetPasswordDto {
+  @ApiProperty({
+    description: '密码重置令牌（从邮件链接中获取）',
+    example: 'a1b2c3d4e5f6...',
+  })
   @IsString({ message: '重置令牌必须是字符串' })
   @IsNotEmpty({ message: '重置令牌不能为空' })
   token: string;
 
+  @ApiProperty({
+    description: '新密码（至少6个字符，包含字母和数字）',
+    example: 'newPassword123',
+    minLength: 6,
+  })
   @IsString({ message: '密码必须是字符串' })
   @IsNotEmpty({ message: '密码不能为空' })
   @MinLength(6, { message: '密码长度至少为6个字符' })

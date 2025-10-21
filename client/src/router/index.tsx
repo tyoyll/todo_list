@@ -16,6 +16,18 @@ const TaskFormPage = React.lazy(() => import('../pages/tasks/TaskFormPage'));
 const SettingsPage = React.lazy(() => import('../pages/settings/SettingsPage'));
 const NotFoundPage = React.lazy(() => import('../pages/error/NotFoundPage'));
 
+// 时间管理页面
+const TimerPage = React.lazy(() => import('../pages/time-management/TimerPage'));
+const PomodoroPage = React.lazy(() => import('../pages/time-management/PomodoroPage'));
+const TimeRecordsPage = React.lazy(() => import('../pages/time-management/TimeRecordsPage'));
+
+// 统计页面
+const StatisticsPage = React.lazy(() => import('../pages/statistics/StatisticsPage'));
+const ReportPage = React.lazy(() => import('../pages/statistics/ReportPage'));
+
+// 通知页面
+const NotificationSettingsPage = React.lazy(() => import('../pages/notifications/NotificationSettingsPage'));
+
 /**
  * 路由配置
  */
@@ -69,6 +81,33 @@ export const router = createBrowserRouter([
       {
         path: 'settings',
         element: <SettingsPage />,
+      },
+      // 时间管理路由
+      {
+        path: 'time-management/timer',
+        element: <TimerPage />,
+      },
+      {
+        path: 'time-management/pomodoro',
+        element: <PomodoroPage />,
+      },
+      {
+        path: 'time-management/records',
+        element: <TimeRecordsPage />,
+      },
+      // 统计路由
+      {
+        path: 'statistics',
+        element: <StatisticsPage />,
+      },
+      {
+        path: 'statistics/report',
+        element: <ReportPage />,
+      },
+      // 通知路由
+      {
+        path: 'notifications/settings',
+        element: <NotificationSettingsPage />,
       },
     ],
   },

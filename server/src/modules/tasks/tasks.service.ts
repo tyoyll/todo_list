@@ -44,7 +44,7 @@ export class TasksService {
    * 获取任务列表
    */
   async getTasks(userId: string, queryTaskDto: QueryTaskDto) {
-    const { page, limit, status, priority, category, search, sortBy, sortOrder } =
+    const { page = 1, limit = 10, status, priority, category, search, sortBy, sortOrder } =
       queryTaskDto;
 
     const skip = (page - 1) * limit;

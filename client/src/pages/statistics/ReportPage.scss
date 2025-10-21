@@ -1,0 +1,206 @@
+.report-page {
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+
+  .page-header {
+    margin-bottom: 2rem;
+
+    h1 {
+      color: #333;
+      margin: 0;
+    }
+  }
+
+  .report-container {
+    display: grid;
+    gap: 2rem;
+
+    > div {
+      background: white;
+      padding: 2rem;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+
+      h2 {
+        margin: 0 0 1.5rem 0;
+        color: #333;
+        font-size: 1.3rem;
+      }
+    }
+
+    .report-config {
+      .form-group {
+        margin-bottom: 1.5rem;
+
+        label {
+          display: block;
+          margin-bottom: 0.5rem;
+          font-weight: 500;
+          color: #333;
+        }
+
+        select,
+        input[type='date'] {
+          width: 100%;
+          padding: 0.75rem;
+          border: 1px solid #ddd;
+          border-radius: 4px;
+          font-size: 1rem;
+
+          &:focus {
+            outline: none;
+            border-color: #1890ff;
+          }
+
+          &:disabled {
+            background-color: #f5f5f5;
+            cursor: not-allowed;
+          }
+        }
+
+        .hint {
+          margin: 0.5rem 0 0 0;
+          font-size: 0.9rem;
+          color: #999;
+        }
+      }
+    }
+
+    .report-preview {
+      .preview-content {
+        .preview-header {
+          padding: 1.5rem;
+          background: #f0f7ff;
+          border-radius: 8px;
+          margin-bottom: 1.5rem;
+
+          h3 {
+            margin: 0 0 0.5rem 0;
+            color: #1890ff;
+          }
+
+          p {
+            margin: 0;
+            color: #666;
+          }
+        }
+
+        .preview-sections {
+          display: grid;
+          gap: 1rem;
+
+          .preview-section {
+            padding: 1.5rem;
+            border: 1px solid #e8e8e8;
+            border-radius: 8px;
+
+            h4 {
+              margin: 0 0 1rem 0;
+              color: #333;
+            }
+
+            ul {
+              margin: 0;
+              padding-left: 1.5rem;
+
+              li {
+                margin-bottom: 0.5rem;
+                color: #666;
+                line-height: 1.6;
+              }
+            }
+          }
+        }
+      }
+    }
+
+    .export-actions {
+      .export-buttons {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+        margin-bottom: 2rem;
+
+        .btn {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          gap: 0.75rem;
+          padding: 2rem;
+          border: 2px solid;
+          border-radius: 8px;
+          background: white;
+          cursor: pointer;
+          transition: all 0.3s;
+
+          .icon {
+            font-size: 3rem;
+          }
+
+          .text {
+            font-size: 1.1rem;
+            font-weight: 500;
+          }
+
+          &.btn-excel {
+            border-color: #52c41a;
+            color: #52c41a;
+
+            &:hover:not(:disabled) {
+              background: #f6ffed;
+              transform: translateY(-2px);
+              box-shadow: 0 4px 12px rgba(82, 196, 26, 0.2);
+            }
+          }
+
+          &.btn-pdf {
+            border-color: #ff4d4f;
+            color: #ff4d4f;
+
+            &:hover:not(:disabled) {
+              background: #fff1f0;
+              transform: translateY(-2px);
+              box-shadow: 0 4px 12px rgba(255, 77, 79, 0.2);
+            }
+          }
+
+          &:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+          }
+        }
+      }
+
+      .export-tips {
+        padding: 1.5rem;
+        background: #f9f9f9;
+        border-radius: 8px;
+
+        h4 {
+          margin: 0 0 1rem 0;
+          color: #333;
+        }
+
+        ul {
+          margin: 0;
+          padding-left: 1.5rem;
+
+          li {
+            margin-bottom: 0.5rem;
+            color: #666;
+            line-height: 1.6;
+          }
+        }
+      }
+    }
+  }
+
+  @media (max-width: 768px) {
+    .report-container .export-actions .export-buttons {
+      grid-template-columns: 1fr;
+    }
+  }
+}
+

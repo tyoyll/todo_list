@@ -1,5 +1,6 @@
 import { NestFactory } from '@nestjs/core';
 import { ValidationPipe } from '@nestjs/common';
+import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { AppModule } from './app.module';
 import { appConfig } from './config/app.config';
 import { HttpExceptionFilter } from './common/filters/http-exception.filter';
@@ -32,7 +33,44 @@ async function bootstrap() {
   // 设置全局前缀
   app.setGlobalPrefix('api/v1');
 
+  // 配置 Swagger API 文档
+  const config = new DocumentBuilder()
+    .setTitle('Todo List API')
+    .setDescription('Todo List 应用 RESTful API 文档')
+    .setVersion('1.0')
+    .addTag('认证', '用户认证和授权相关接口')
+    .addTag('用户', '用户管理相关接口')
+    .addTag('任务', '任务管理相关接口')
+    .addTag('时间管理', '时间记录和番茄钟相关接口')
+    .addTag('通知', '通知管理相关接口')
+    .addTag('统计', '数据统计和分析相关接口')
+    .addBearerAuth(
+      {
+        type: 'http',
+        scheme: 'bearer',
+        bearerFormat: 'JWT',
+        name: 'JWT',
+        description: '输入JWT token',
+        in: 'header',
+      },
+      'JWT-auth',
+    )
+    .build();
+
+  const document = SwaggerModule.createDocument(app, config);
+  SwaggerModule.setup('api/docs', app, document, {
+    customSiteTitle: 'Todo List API 文档',
+    customCss: '.swagger-ui .topbar { display: none }',
+    swaggerOptions: {
+      persistAuthorization: true,
+      docExpansion: 'none',
+      filter: true,
+      showRequestDuration: true,
+    },
+  });
+
   await app.listen(appConfig.port);
   console.log(`🚀 应用启动成功，运行在端口 ${appConfig.port}`);
+  console.log(`📚 API 文档地址: http://localhost:${appConfig.port}/api/docs`);
 }
 bootstrap();

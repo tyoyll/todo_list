@@ -1,0 +1,193 @@
+.notification-settings-page {
+  padding: 2rem;
+  max-width: 900px;
+  margin: 0 auto;
+
+  .page-header {
+    margin-bottom: 2rem;
+
+    h1 {
+      color: #333;
+      margin: 0;
+    }
+  }
+
+  .loading {
+    text-align: center;
+    padding: 3rem;
+    color: #666;
+    font-size: 1.1rem;
+  }
+
+  .settings-container {
+    .settings-section {
+      background: white;
+      padding: 2rem;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      margin-bottom: 1.5rem;
+
+      h2 {
+        margin: 0 0 1.5rem 0;
+        color: #333;
+        font-size: 1.2rem;
+        padding-bottom: 0.75rem;
+        border-bottom: 2px solid #f0f0f0;
+      }
+
+      .settings-group {
+        .setting-item {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          padding: 1.25rem 0;
+          border-bottom: 1px solid #f0f0f0;
+
+          &:last-child {
+            border-bottom: none;
+          }
+
+          .setting-info {
+            flex: 1;
+
+            .setting-label {
+              font-weight: 500;
+              color: #333;
+              margin-bottom: 0.25rem;
+              font-size: 1rem;
+            }
+
+            .setting-desc {
+              color: #999;
+              font-size: 0.9rem;
+            }
+          }
+
+          .select-input,
+          .time-input {
+            padding: 0.5rem 1rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1rem;
+            min-width: 150px;
+
+            &:focus {
+              outline: none;
+              border-color: #1890ff;
+            }
+          }
+
+          .toggle-switch {
+            position: relative;
+            display: inline-block;
+            width: 52px;
+            height: 28px;
+
+            input {
+              opacity: 0;
+              width: 0;
+              height: 0;
+
+              &:checked + .slider {
+                background-color: #1890ff;
+              }
+
+              &:checked + .slider:before {
+                transform: translateX(24px);
+              }
+            }
+
+            .slider {
+              position: absolute;
+              cursor: pointer;
+              top: 0;
+              left: 0;
+              right: 0;
+              bottom: 0;
+              background-color: #ccc;
+              transition: 0.4s;
+              border-radius: 28px;
+
+              &:before {
+                position: absolute;
+                content: '';
+                height: 20px;
+                width: 20px;
+                left: 4px;
+                bottom: 4px;
+                background-color: white;
+                transition: 0.4s;
+                border-radius: 50%;
+              }
+            }
+          }
+        }
+      }
+    }
+
+    .settings-actions {
+      display: flex;
+      gap: 1rem;
+      justify-content: flex-end;
+      margin-top: 2rem;
+
+      .btn {
+        padding: 0.75rem 2rem;
+        border: none;
+        border-radius: 4px;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: all 0.3s;
+
+        &.btn-primary {
+          background: #1890ff;
+          color: white;
+
+          &:hover:not(:disabled) {
+            background: #40a9ff;
+          }
+        }
+
+        &.btn-secondary {
+          background: white;
+          color: #666;
+          border: 1px solid #ddd;
+
+          &:hover:not(:disabled) {
+            background: #f0f0f0;
+          }
+        }
+
+        &:disabled {
+          opacity: 0.6;
+          cursor: not-allowed;
+        }
+      }
+    }
+  }
+
+  @media (max-width: 768px) {
+    padding: 1rem;
+
+    .settings-container .settings-section .settings-group .setting-item {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 1rem;
+
+      .toggle-switch,
+      .select-input,
+      .time-input {
+        align-self: flex-end;
+      }
+    }
+
+    .settings-container .settings-actions {
+      flex-direction: column;
+
+      .btn {
+        width: 100%;
+      }
+    }
+  }
+}
+

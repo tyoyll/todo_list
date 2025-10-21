@@ -1,0 +1,214 @@
+.notification-center {
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  max-width: 500px;
+  max-height: 600px;
+  display: flex;
+  flex-direction: column;
+
+  .notification-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem;
+    border-bottom: 1px solid #e8e8e8;
+
+    h2 {
+      margin: 0;
+      color: #333;
+      font-size: 1.3rem;
+    }
+
+    .close-btn {
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      color: #999;
+      cursor: pointer;
+      padding: 0;
+      width: 30px;
+      height: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      transition: all 0.3s;
+
+      &:hover {
+        background: #f0f0f0;
+        color: #333;
+      }
+    }
+  }
+
+  .notification-controls {
+    padding: 1rem 1.5rem;
+    border-bottom: 1px solid #e8e8e8;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+
+    .filter-buttons,
+    .action-buttons {
+      display: flex;
+      gap: 0.5rem;
+
+      button {
+        padding: 0.5rem 1rem;
+        border: 1px solid #ddd;
+        background: white;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 0.9rem;
+        transition: all 0.3s;
+
+        &:hover {
+          background: #f0f0f0;
+        }
+
+        &.active {
+          background: #1890ff;
+          color: white;
+          border-color: #1890ff;
+        }
+      }
+    }
+  }
+
+  .loading {
+    padding: 3rem;
+    text-align: center;
+    color: #666;
+  }
+
+  .empty-state {
+    padding: 3rem;
+    text-align: center;
+
+    p {
+      color: #999;
+      margin: 0;
+    }
+  }
+
+  .notification-list {
+    flex: 1;
+    overflow-y: auto;
+
+    .notification-item {
+      display: flex;
+      gap: 1rem;
+      padding: 1rem 1.5rem;
+      border-bottom: 1px solid #f0f0f0;
+      transition: background 0.3s;
+
+      &:hover {
+        background: #fafafa;
+      }
+
+      &.unread {
+        background: #f0f7ff;
+
+        &:hover {
+          background: #e6f4ff;
+        }
+      }
+
+      .notification-icon {
+        font-size: 2rem;
+        flex-shrink: 0;
+      }
+
+      .notification-content {
+        flex: 1;
+        min-width: 0;
+
+        .notification-title {
+          font-weight: 500;
+          color: #333;
+          margin-bottom: 0.5rem;
+        }
+
+        .notification-message {
+          color: #666;
+          font-size: 0.9rem;
+          margin-bottom: 0.5rem;
+          word-wrap: break-word;
+        }
+
+        .notification-time {
+          color: #999;
+          font-size: 0.85rem;
+        }
+      }
+
+      .notification-actions {
+        display: flex;
+        gap: 0.5rem;
+        flex-shrink: 0;
+
+        button {
+          background: none;
+          border: none;
+          cursor: pointer;
+          padding: 0.25rem;
+          border-radius: 4px;
+          transition: all 0.3s;
+          width: 30px;
+          height: 30px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+
+          &:hover {
+            background: #f0f0f0;
+          }
+
+          &.mark-read-btn {
+            color: #52c41a;
+            font-weight: bold;
+          }
+
+          &.delete-btn {
+            font-size: 1rem;
+          }
+        }
+      }
+    }
+  }
+
+  .pagination {
+    padding: 1rem 1.5rem;
+    border-top: 1px solid #e8e8e8;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+
+    button {
+      padding: 0.5rem 1rem;
+      border: 1px solid #ddd;
+      background: white;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: all 0.3s;
+
+      &:hover:not(:disabled) {
+        background: #f0f0f0;
+      }
+
+      &:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+      }
+    }
+
+    span {
+      color: #666;
+    }
+  }
+}
+

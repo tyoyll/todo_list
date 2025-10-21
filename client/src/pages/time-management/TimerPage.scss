@@ -1,0 +1,128 @@
+.timer-page {
+  padding: 2rem;
+  max-width: 800px;
+  margin: 0 auto;
+
+  .timer-container {
+    background: white;
+    border-radius: 8px;
+    padding: 3rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+
+    h1 {
+      margin-bottom: 2rem;
+      color: #333;
+    }
+  }
+
+  .timer-display {
+    margin: 3rem 0;
+
+    .time {
+      font-size: 4rem;
+      font-weight: bold;
+      color: #1890ff;
+      font-family: 'Courier New', monospace;
+      margin-bottom: 1rem;
+    }
+
+    .status {
+      font-size: 1.2rem;
+      color: #666;
+    }
+  }
+
+  .timer-form {
+    margin: 2rem 0;
+    text-align: left;
+
+    .form-group {
+      margin-bottom: 1.5rem;
+
+      label {
+        display: block;
+        margin-bottom: 0.5rem;
+        font-weight: 500;
+        color: #333;
+      }
+
+      select,
+      input {
+        width: 100%;
+        padding: 0.75rem;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        font-size: 1rem;
+
+        &:focus {
+          outline: none;
+          border-color: #1890ff;
+        }
+
+        &:disabled {
+          background-color: #f5f5f5;
+          cursor: not-allowed;
+        }
+      }
+    }
+  }
+
+  .current-task-info {
+    margin: 2rem 0;
+    padding: 1rem;
+    background: #f0f7ff;
+    border-radius: 4px;
+    border-left: 4px solid #1890ff;
+
+    h3 {
+      margin: 0 0 0.5rem 0;
+      font-size: 1rem;
+      color: #666;
+    }
+
+    p {
+      margin: 0;
+      font-size: 1.1rem;
+      color: #333;
+      font-weight: 500;
+    }
+  }
+
+  .timer-actions {
+    margin-top: 2rem;
+
+    .btn {
+      padding: 1rem 3rem;
+      font-size: 1.2rem;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: all 0.3s;
+
+      &.btn-primary {
+        background: #1890ff;
+        color: white;
+
+        &:hover:not(:disabled) {
+          background: #40a9ff;
+        }
+      }
+
+      &.btn-danger {
+        background: #ff4d4f;
+        color: white;
+
+        &:hover:not(:disabled) {
+          background: #ff7875;
+        }
+      }
+
+      &:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+      }
+    }
+  }
+}
+

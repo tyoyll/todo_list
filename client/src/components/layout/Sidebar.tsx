@@ -33,19 +33,43 @@ const Sidebar: React.FC = () => {
       label: '任务管理',
     },
     {
-      key: '/pomodoro',
+      key: 'time-management',
       icon: <ClockCircleOutlined />,
-      label: '番茄钟',
+      label: '时间管理',
+      children: [
+        {
+          key: '/time-management/timer',
+          label: '工作计时器',
+        },
+        {
+          key: '/time-management/pomodoro',
+          label: '番茄钟',
+        },
+        {
+          key: '/time-management/records',
+          label: '工作记录',
+        },
+      ],
     },
     {
-      key: '/statistics',
+      key: 'statistics',
       icon: <BarChartOutlined />,
       label: '数据统计',
+      children: [
+        {
+          key: '/statistics',
+          label: '统计仪表板',
+        },
+        {
+          key: '/statistics/report',
+          label: '报表导出',
+        },
+      ],
     },
     {
-      key: '/notifications',
+      key: '/notifications/settings',
       icon: <BellOutlined />,
-      label: '通知中心',
+      label: '通知设置',
     },
     {
       key: '/settings',
@@ -59,9 +83,22 @@ const Sidebar: React.FC = () => {
   };
 
   // 获取当前选中的菜单项
-  const selectedKeys = menuItems
-    .filter((item) => location.pathname.startsWith(item.key))
-    .map((item) => item.key);
+  const getSelectedKeys = () => {
+    const path = location.pathname;
+    return [path];
+  };
+
+  // 获取展开的菜单项
+  const getOpenKeys = () => {
+    const path = location.pathname;
+    if (path.startsWith('/time-management')) {
+      return ['time-management'];
+    }
+    if (path.startsWith('/statistics')) {
+      return ['statistics'];
+    }
+    return [];
+  };
 
   return (
     <Sider
@@ -73,7 +110,8 @@ const Sidebar: React.FC = () => {
     >
       <Menu
         mode="inline"
-        selectedKeys={selectedKeys}
+        selectedKeys={getSelectedKeys()}
+        defaultOpenKeys={getOpenKeys()}
         items={menuItems}
         onClick={handleMenuClick}
         style={{ height: '100%', borderRight: 0 }}
