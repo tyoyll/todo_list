@@ -5,9 +5,22 @@ import { AppModule } from './app.module';
 import { appConfig } from './config/app.config';
 import { HttpExceptionFilter } from './common/filters/http-exception.filter';
 import { ResponseInterceptor } from './common/interceptors/response.interceptor';
+import * as compression from 'compression';
+import helmet from 'helmet';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+
+  // 启用压缩中间件 - 提高响应速度
+  app.use(compression());
+
+  // 启用安全中间件 - 设置安全HTTP头
+  app.use(
+    helmet({
+      contentSecurityPolicy: false, // Swagger需要禁用CSP
+      crossOriginEmbedderPolicy: false,
+    }),
+  );
 
   // 启用 CORS
   app.enableCors({

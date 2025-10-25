@@ -1,0 +1,48 @@
+version: '3.8'
+
+# 开发环境配置
+# 使用方法: docker-compose -f docker-compose.yml -f docker-compose.dev.yml up
+
+services:
+  postgres:
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: todo_list_dev
+      POSTGRES_USER: todo_dev
+      POSTGRES_PASSWORD: dev_password
+
+  redis:
+    ports:
+      - "6379:6379"
+    command: redis-server  # 开发环境不需要密码
+
+  backend:
+    build:
+      context: ./server
+      target: builder  # 使用构建阶段，包含开发工具
+    command: npm run start:dev  # 使用热重载
+    volumes:
+      - ./server/src:/app/src:ro
+      - ./server/package.json:/app/package.json:ro
+    environment:
+      - NODE_ENV=development
+      - LOG_LEVEL=debug
+    ports:
+      - "3000:3000"
+      - "9229:9229"  # Node.js调试端口
+
+  frontend:
+    build:
+      context: ./client
+      target: builder
+    command: npm run dev
+    volumes:
+      - ./client/src:/app/src:ro
+      - ./client/package.json:/app/package.json:ro
+    ports:
+      - "5173:5173"
+    environment:
+      - VITE_API_URL=http://localhost:3000/api/v1
+      - VITE_ENABLE_DEBUG=true
+

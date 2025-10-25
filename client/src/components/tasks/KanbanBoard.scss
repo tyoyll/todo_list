@@ -1,0 +1,13 @@
+.kanban-board {
+  display: flex;
+  gap: 16px;
+  padding: 16px;
+  height: calc(100vh - 200px);
+  overflow-x: auto;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    height: auto;
+  }
+}
+

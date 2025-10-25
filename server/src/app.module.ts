@@ -1,10 +1,13 @@
-import { Module } from '@nestjs/common';
+import { Module, CacheModule } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from '@nestjs/config';
+import { ThrottlerModule, ThrottlerGuard } from '@nestjs/throttler';
 import { APP_GUARD } from '@nestjs/core';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { databaseConfig } from './config/database.config';
+import { redisConfig } from './config/redis.config';
+import { throttlerConfig } from './config/throttler.config';
 import { AuthModule } from './modules/auth/auth.module';
 import { UsersModule } from './modules/users/users.module';
 import { TasksModule } from './modules/tasks/tasks.module';
@@ -20,6 +23,13 @@ import { JwtAuthGuard } from './modules/auth/guards/jwt-auth.guard';
       isGlobal: true, // 使配置全局可用
       envFilePath: '.env',
     }),
+    // 缓存模块（Redis）
+    CacheModule.register({
+      isGlobal: true, // 全局可用
+      ...redisConfig,
+    }),
+    // 速率限制模块
+    ThrottlerModule.forRoot(throttlerConfig),
     // 数据库模块
     TypeOrmModule.forRoot(databaseConfig),
     // 认证模块
@@ -42,6 +52,11 @@ import { JwtAuthGuard } from './modules/auth/guards/jwt-auth.guard';
     {
       provide: APP_GUARD,
       useClass: JwtAuthGuard,
+    },
+    // 全局启用速率限制守卫
+    {
+      provide: APP_GUARD,
+      useClass: ThrottlerGuard,
     },
   ],
 })

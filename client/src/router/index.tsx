@@ -13,6 +13,7 @@ const DashboardPage = React.lazy(() => import('../pages/dashboard/DashboardPage'
 const TaskListPage = React.lazy(() => import('../pages/tasks/TaskListPage'));
 const TaskDetailPage = React.lazy(() => import('../pages/tasks/TaskDetailPage'));
 const TaskFormPage = React.lazy(() => import('../pages/tasks/TaskFormPage'));
+const KanbanPage = React.lazy(() => import('../pages/tasks/KanbanPage'));
 const SettingsPage = React.lazy(() => import('../pages/settings/SettingsPage'));
 const NotFoundPage = React.lazy(() => import('../pages/error/NotFoundPage'));
 
@@ -65,6 +66,10 @@ export const router = createBrowserRouter([
       {
         path: 'tasks',
         element: <TaskListPage />,
+      },
+      {
+        path: 'tasks/kanban',
+        element: <KanbanPage />,
       },
       {
         path: 'tasks/new',

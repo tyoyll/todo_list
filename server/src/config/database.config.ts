@@ -16,4 +16,22 @@ export const databaseConfig: TypeOrmModuleOptions = {
   logging: process.env.NODE_ENV === 'development',
   migrations: [__dirname + '/../migrations/*{.ts,.js}'],
   migrationsRun: false,
+  
+  // 连接池配置 - 提高性能
+  extra: {
+    // 连接池最大连接数
+    max: parseInt(process.env.DB_POOL_MAX || '20', 10),
+    // 连接池最小连接数
+    min: parseInt(process.env.DB_POOL_MIN || '2', 10),
+    // 连接空闲超时时间（毫秒）
+    idleTimeoutMillis: 30000,
+    // 连接超时时间（毫秒）
+    connectionTimeoutMillis: 2000,
+  },
+  
+  // 查询性能优化
+  cache: {
+    // 启用查询缓存
+    duration: 30000, // 缓存30秒
+  },
 };

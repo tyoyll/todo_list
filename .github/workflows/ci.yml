@@ -1,0 +1,135 @@
+name: CI
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main, develop ]
+
+jobs:
+  # 后端测试
+  backend-test:
+    name: Backend Tests
+    runs-on: ubuntu-latest
+    
+    services:
+      postgres:
+        image: postgres:14
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: todo_test
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+      
+      redis:
+        image: redis:6-alpine
+        ports:
+          - 6379:6379
+        options: >-
+          --health-cmd "redis-cli ping"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+    
+    steps:
+      - name: Checkout代码
+        uses: actions/checkout@v3
+      
+      - name: 设置Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+          cache: 'npm'
+          cache-dependency-path: server/package-lock.json
+      
+      - name: 安装依赖
+        working-directory: ./server
+        run: npm ci
+      
+      - name: 代码检查
+        working-directory: ./server
+        run: npm run lint
+      
+      - name: 运行测试
+        working-directory: ./server
+        run: npm test
+        env:
+          NODE_ENV: test
+          DB_HOST: localhost
+          DB_PORT: 5432
+          DB_USERNAME: postgres
+          DB_PASSWORD: postgres
+          DB_DATABASE: todo_test
+          JWT_SECRET: test_jwt_secret_key_for_ci
+          JWT_REFRESH_SECRET: test_jwt_refresh_secret_key_for_ci
+          REDIS_HOST: localhost
+          REDIS_PORT: 6379
+      
+      - name: E2E测试
+        working-directory: ./server
+        run: npm run test:e2e
+        env:
+          NODE_ENV: test
+          DB_HOST: localhost
+          DB_PORT: 5432
+          DB_USERNAME: postgres
+          DB_PASSWORD: postgres
+          DB_DATABASE: todo_test
+          JWT_SECRET: test_jwt_secret_key_for_ci
+          JWT_REFRESH_SECRET: test_jwt_refresh_secret_key_for_ci
+          REDIS_HOST: localhost
+          REDIS_PORT: 6379
+  
+  # 前端测试
+  frontend-test:
+    name: Frontend Tests
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout代码
+        uses: actions/checkout@v3
+      
+      - name: 设置Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+          cache: 'npm'
+          cache-dependency-path: client/package-lock.json
+      
+      - name: 安装依赖
+        working-directory: ./client
+        run: npm ci
+      
+      - name: 运行单元测试
+        working-directory: ./client
+        run: npm test -- --run
+      
+      - name: 构建检查
+        working-directory: ./client
+        run: npm run build
+  
+  # 安全检查
+  security-check:
+    name: Security Audit
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout代码
+        uses: actions/checkout@v3
+      
+      - name: 后端安全审计
+        working-directory: ./server
+        run: npm audit --audit-level=high
+        continue-on-error: true
+      
+      - name: 前端安全审计
+        working-directory: ./client
+        run: npm audit --audit-level=high
+        continue-on-error: true
+
